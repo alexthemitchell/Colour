@@ -22,6 +22,8 @@ class CLRbase: UIView {
         backgroundLayer = CAShapeLayer()
         super.init(coder: aDecoder)
         resetTrack()
+        layers.append(CLRlayer(colour: UIColor.redColor(), width: 10, path: track!))
+        redrawView()
     }
     
     func resetTrack(){
@@ -42,7 +44,32 @@ class CLRbase: UIView {
         backgroundLayer.lineWidth = width
         self.layer.sublayers = []
         self.layer.addSublayer(backgroundLayer)
+    }
+    
+    func redrawView(){
+        self.layer.sublayers = []
         
+        for layer in self.layers {
+            self.layer.addSublayer(layer.toCALayer())
+        }
+    }
+    
+    func addColourLayer(){
+        
+    }
+    func animate(){
+        var duration = 1.0 - layers.first!.endPoint
+        var strokeEndFinal = 1.0
+        
+        for layer in layers{
+            var strokeEndAnimation = CABasicAnimation(keyPath: "strokeEnd")
+            strokeEndAnimation.duration = CFTimeInterval(duration)
+            strokeEndAnimation.fromValue = layer.endPoint
+            strokeEndAnimation.toValue = strokeEndFinal
+            strokeEndAnimation.autoreverses = false
+            strokeEndAnimation.repeatCount = 0
+            
+        }
         
     }
    

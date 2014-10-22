@@ -32,6 +32,9 @@
                             <constraint firstAttribute="centerY" secondItem="W0f-Bu-Dlw" secondAttribute="centerY" id="kug-dm-Nnv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="userCircle" destination="W0f-Bu-Dlw" id="Vyc-3d-Psj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
