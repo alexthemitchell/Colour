@@ -8,33 +8,18 @@
 
 import UIKit
 
-class CLRlayer: NSObject {
-    var startPoint: CGFloat
-    var endPoint: CGFloat
-    var colour: UIColor
-    var width: CGFloat
-    var path: UIBezierPath
+class CLRlayer: CAShapeLayer {
     
-    convenience init(colour: UIColor, width: Float, path: UIBezierPath){
-        self.init(colour: colour, width: width, path: path, startPoint: 0, endPoint: 1)
+    required init(colour: UIColor, path: UIBezierPath, strokeWidth: Float){
+        super.init()
+        self.path = path.CGPath
+        self.strokeColor = colour.CGColor
+        self.fillColor = UIColor.clearColor().CGColor
+        self.lineWidth = CGFloat(strokeWidth)
     }
     
-    func toCALayer() -> CAShapeLayer {
-        var layer = CAShapeLayer()
-        layer.path = path.CGPath
-        layer.strokeColor = colour.CGColor
-        layer.fillColor = UIColor.clearColor().CGColor
-        layer.lineWidth = width
-        layer.strokeStart = startPoint
-        layer.strokeEnd = endPoint
-        return layer
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    init(colour: UIColor, width: Float, path: UIBezierPath, startPoint: Float, endPoint: Float){
-        self.colour = colour
-        self.width = CGFloat(width)
-        self.path = path
-        self.startPoint = CGFloat(startPoint)
-        self.endPoint = CGFloat (endPoint)
-    }
-   
+    
 }
